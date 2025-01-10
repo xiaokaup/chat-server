@@ -49,6 +49,29 @@ Description: The main folder for the User Service, houses all related files and 
 8. Delivery to Consumers: Once sorted, the letters are delivered to the respective receivers (consumers) who can then process the information. The listenForRequests function processes messages from the requestQueue and delivers the user details response to the responseQueue.
 9. Acknowledgment (Received Confirmation): In RabbitMQ, acknowledgments confirm that a message has been successfully processed. Our code uses this.channel.ack(msg) to acknowledge that the processed message has been received.
 
+## `notification-service`
+
+1. config/config.ts:
+   This file contains configurations related to the Notification Service, such as RabbitMQ connection details and other environment variables.
+2. services/RabbitMQService.ts:
+   This file implements the RabbitMQ service, which handles message queueing and communication with other microservices via RabbitMQ.
+3. services/EmailService.ts:
+   This file defines the Email service, responsible for sending email notifications to users based on certain events or triggers within the application.
+4. services/FCMService.ts:
+   This file contains the Firebase Cloud Messaging (FCM) service implementation, allowing the Notification Service to send push notifications to mobile devices.
+5. services/index.ts:
+   This file exports all service modules, facilitating easy import and access to service functionalities from other parts of the application.
+6. middleware/index.ts:
+   This file houses and exports middleware functions used within the Notification Service, such as authentication middleware or error handling middleware.
+7. utils/apiError.ts:
+   This file defines the ApiError class, which represents custom error objects used throughout the application to handle API-related errors.
+8. utils/userStatusStore.ts:
+   This file contains the UserStatusStore class, which manages the online/offline status of users, facilitating real-time communication and notification delivery.
+9. utils/index.ts:
+   This file exports utility functions and classes for easy access and use within the Notification Service.
+10. server.ts:
+    This file initializes and starts the Express server for the Notification Service, defining routes, middleware, and server setup logic.
+
 ## Resource
 
 - Source: https://dev.to/davydocsurg/mastering-microservices-a-hands-on-tutorial-with-nodejs-rabbitmq-nginx-and-docker-m4f
