@@ -3,6 +3,14 @@ import config from "../config/config";
 import { User } from "../database";
 import { ApiError } from "../utils";
 
+// Start a rabbitMQ service by docker
+// docker run -d \
+//     --name rabbitmq \
+//     -p 5672:5672 \
+//     -p 15672:15672 \
+//     rabbitmq:3-management
+// Connection link: 'amqp://guest:guest@localhost:5672'
+
 class RabbitMQService {
   private requestQueue = "USER_DETAILS_REQUEST";
   private responseQueue = "USER_DETAILS_RESPONSE";
@@ -15,7 +23,9 @@ class RabbitMQService {
 
   async init() {
     // Establish connection to RabbitMQ server
-    this.connection = await amqp.connect(config.msgBrokerURL!);
+    // @ToFix: Not work with config.msgBrokerURL! on cloudamqp
+    // this.connection = await amqp.connect(config.msgBrokerURL!);
+    this.connection = await amqp.connect("amqp://guest:guest@localhost:5672");
     this.channel = await this.connection.createChannel();
 
     // Asserting queues ensures they exist
