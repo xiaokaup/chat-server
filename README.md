@@ -49,6 +49,19 @@ Description: The main folder for the User Service, houses all related files and 
 8. Delivery to Consumers: Once sorted, the letters are delivered to the respective receivers (consumers) who can then process the information. The listenForRequests function processes messages from the requestQueue and delivers the user details response to the responseQueue.
 9. Acknowledgment (Received Confirmation): In RabbitMQ, acknowledgments confirm that a message has been successfully processed. Our code uses this.channel.ack(msg) to acknowledge that the processed message has been received.
 
+## `chat-service`
+
+- config: contains the configuration files for our Chat Service. The config.ts file holds environment variables and configurations.
+- controllers: Here, we manage the business logic for handling messages in the MessageController.ts file. This is where operations on messages are defined.
+- services: The RabbitMQService.ts file in this folder handles interactions with the RabbitMQ message broker, facilitating communication between microservices.
+- database/models: In this folder, we define the data model for messages using MessageModel.ts.
+- database: The connection.ts and index.ts files handle database connections and export models.
+- middleware: The index.ts file in this folder consolidates the middleware functions we will use later on.
+- routes: The messageRoutes.ts file in this folder defines the routes and their corresponding handlers for message-related operations.
+- utils: This folder contains utility files such as apiError.ts for handling API errors, messageHandler.ts for managing incoming messages, and userStatusStore.ts for tracking user statuses. The index.ts file consolidates exports from the utils folder.
+- app.ts: This file serves as the entry point for our Chat Service application.
+- server.ts: Here, we set up the Express server, configure middleware, and establish routes.
+
 ## `notification-service`
 
 1. config/config.ts:
