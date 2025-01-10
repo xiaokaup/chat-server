@@ -24,8 +24,7 @@ class RabbitMQService {
   async init() {
     // Establish connection to RabbitMQ server
     // @ToFix: Not work with config.msgBrokerURL! on cloudamqp
-    // this.connection = await amqp.connect(config.msgBrokerURL!);
-    this.connection = await amqp.connect("amqp://guest:guest@localhost:5672");
+    this.connection = await amqp.connect(config.msgBrokerURL!);
     this.channel = await this.connection.createChannel();
 
     // Asserting queues ensures they exist
