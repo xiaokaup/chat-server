@@ -10,6 +10,7 @@ export const handleMessageReceived = async (
   messageContent: string,
 ) => {
   const receiverIsOffline = !userStatusStore.isUserOnline(receiverId);
+  console.log("Receiver is offline: ", receiverIsOffline);
 
   if (receiverIsOffline) {
     await rabbitMQService.notifyReceiver(

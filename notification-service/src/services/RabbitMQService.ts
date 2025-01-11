@@ -23,6 +23,11 @@ class RabbitMQService {
   async consumeNotification() {
     await this.channel.assertQueue(config.queue.notifications);
     this.channel.consume(config.queue.notifications, async (msg) => {
+      console.log(
+        "consume message in notification service",
+        msg?.content.toString(),
+      );
+
       if (msg) {
         const { type, userId, message, userEmail, userToken, fromName } =
           JSON.parse(msg.content.toString());
@@ -30,6 +35,7 @@ class RabbitMQService {
         if (type === "MESSAGE_RECEIVED") {
           // Check if the user is online
           const isUserOnline = this.userStatusStore.isUserOnline(userId);
+          console.log("User is online: ", isUserOnline);
 
           if (isUserOnline && userToken) {
             // User is online, send a push notification

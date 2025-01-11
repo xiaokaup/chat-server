@@ -1,11 +1,11 @@
 import express, { Express } from "express";
-import userRouter from "./routes/messageRoutes";
+import messageRoutes from "./routes/messageRoutes";
 import { errorConverter, errorHandler } from "./middleware";
 
 const app: Express = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(userRouter);
+app.use("/chat", messageRoutes);
 app.use(errorConverter);
 app.use(errorHandler);
 
